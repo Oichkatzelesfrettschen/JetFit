@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jetfit"
+version = "0.1.0"
+description = "JetFit - Boosted Fireball Model Fitting for GRB Afterglows"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+requires-python = ">=3.9"
+authors = [
+    { name = "JetFit Developers" },
+]
+keywords = ["grb", "gamma-ray burst", "afterglow", "jet", "mcmc", "astrophysics"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+
+dependencies = [
+    "numpy>=1.20",
+    "scipy>=1.7",
+    "pandas>=1.5",
+    "matplotlib>=3.5",
+    "emcee>=3.0",
+    "h5py>=3.0",
+]
+
+[project.optional-dependencies]
+grb-common = [
+    "grb-common[fitting,plotting]>=0.1.0",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "ruff>=0.1",
+]
+all = [
+    "jetfit[grb-common,dev]",
+]
+
+[project.urls]
+Homepage = "https://github.com/Oichkatzelesfrettschen/JetFit"
+Repository = "https://github.com/Oichkatzelesfrettschen/JetFit"
+
+[tool.hatch.build.targets.wheel]
+packages = ["JetFit"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
